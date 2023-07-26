@@ -1,11 +1,15 @@
 package com.example.pokemontest.mvp.presenter
 
+import com.example.pokemontest.di.list.ListScopeContainer
 import com.example.pokemontest.mvp.model.IRepository
-import com.example.pokemontest.mvp.model.Pokemon
+import com.example.pokemontest.mvp.model.entity.Pokemon
 import com.example.pokemontest.mvp.presenter.itemPresenter.IPokemonItemPresenter
 import com.example.pokemontest.mvp.view.PokemonListView
 import com.example.pokemontest.mvp.view.itemView.IPokemonItemView
+import com.example.pokemontest.utils.disposeBy
 import com.github.terrakok.cicerone.Router
+import io.reactivex.rxjava3.core.Scheduler
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
 import javax.inject.Inject
 
@@ -16,6 +20,14 @@ class PokemonListPresenter : MvpPresenter<PokemonListView>() {
 
     @Inject
     lateinit var repositoryImpl: IRepository
+
+    @Inject
+    lateinit var listScopeContainer: ListScopeContainer
+
+    @Inject
+    lateinit var uiScheduler: Scheduler
+
+    private var disposable = CompositeDisposable()
 
     class PokemonItemPresenter : IPokemonItemPresenter {
 
@@ -43,15 +55,23 @@ class PokemonListPresenter : MvpPresenter<PokemonListView>() {
 
     private fun loadData() {
 
-        val pokemons = repositoryImpl.getList()
+        repositoryImpl.getList().observeOn(uiScheduler)
+            .subscribe({
+                pokemonItemPresenter.pokemons.addAll(it.results)
+                viewState.updateList()
+            }, {
 
-        pokemonItemPresenter.pokemons.addAll(pokemons)
-
-        viewState.updateList()
+            }).disposeBy(disposable)
     }
 
     fun onBackPressed(): Boolean {
         router.exit()
         return true
+    }
+
+    override fun onDestroy() {
+        listScopeContainer.releaseListSubcomponent()
+        super.onDestroy()
+        disposable.dispose()
     }
 }

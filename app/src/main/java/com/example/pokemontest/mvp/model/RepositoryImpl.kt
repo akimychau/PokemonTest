@@ -1,18 +1,13 @@
 package com.example.pokemontest.mvp.model
 
-class RepositoryImpl : IRepository {
+import com.example.pokemontest.mvp.model.api.IDataSource
+import com.example.pokemontest.mvp.model.entity.ListPokemon
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 
-    private val testList = listOf(
-        Pokemon("Pikachu1"),
-        Pokemon("Pikachu2"),
-        Pokemon("Pikachu3"),
-        Pokemon("Pikachu4"),
-        Pokemon("Pikachu5"),
-        Pokemon("Pikachu6"),
-        Pokemon("Pikachu7"),
-        Pokemon("Pikachu8"),
-        Pokemon("Pikachu9")
-    )
+class RepositoryImpl(private val api: IDataSource) : IRepository {
 
-    override fun getList() = testList
+
+    override fun getList(): Single<ListPokemon> =
+        api.getAllPokemon().subscribeOn(Schedulers.io())
 }

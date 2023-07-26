@@ -5,6 +5,7 @@ import com.example.pokemontest.di.AppComponent
 import com.example.pokemontest.di.DaggerAppComponent
 import com.example.pokemontest.di.list.ListScopeContainer
 import com.example.pokemontest.di.list.ListSubComponent
+import com.example.pokemontest.di.modules.AppModule
 
 class App : Application(), ListScopeContainer {
 
@@ -17,6 +18,7 @@ class App : Application(), ListScopeContainer {
         instance = this
 
         appComponent = DaggerAppComponent.builder()
+            .appModule(AppModule(this))
             .build()
     }
 

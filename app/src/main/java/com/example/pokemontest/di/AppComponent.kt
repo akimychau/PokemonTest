@@ -1,6 +1,7 @@
 package com.example.pokemontest.di
 
 import com.example.pokemontest.di.list.ListSubComponent
+import com.example.pokemontest.di.modules.ApiModule
 import com.example.pokemontest.di.modules.AppModule
 import com.example.pokemontest.di.modules.CiceroneModule
 import com.example.pokemontest.mvp.presenter.MainPresenter
@@ -11,6 +12,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
+        ApiModule::class,
         AppModule::class,
         CiceroneModule::class
     ]
