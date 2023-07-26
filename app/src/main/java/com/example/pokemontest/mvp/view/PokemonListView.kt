@@ -5,4 +5,8 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface PokemonListView : MvpView
+interface PokemonListView : MvpView {
+
+    fun init()
+    fun updateList()
+}
