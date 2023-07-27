@@ -6,4 +6,7 @@ import io.reactivex.rxjava3.core.Single
 interface IRepository {
 
     fun getList(): Single<ListPokemon>
+
+    fun nextPage(next: String?): Single<ListPokemon>
+    fun previousPage(previous: String?): Single<ListPokemon>
 }

@@ -2,6 +2,7 @@ package com.example.pokemontest.mvp.presenter
 
 import com.example.pokemontest.di.list.ListScopeContainer
 import com.example.pokemontest.mvp.model.IRepository
+import com.example.pokemontest.mvp.model.entity.ListPokemon
 import com.example.pokemontest.mvp.model.entity.Pokemon
 import com.example.pokemontest.mvp.presenter.itemPresenter.IPokemonItemPresenter
 import com.example.pokemontest.mvp.view.PokemonListView
@@ -9,6 +10,7 @@ import com.example.pokemontest.mvp.view.itemView.IPokemonItemView
 import com.example.pokemontest.utils.disposeBy
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
+import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import moxy.MvpPresenter
 import javax.inject.Inject
@@ -45,6 +47,9 @@ class PokemonListPresenter : MvpPresenter<PokemonListView>() {
 
     val pokemonItemPresenter = PokemonItemPresenter()
 
+    private var nextPageUrl: String? = null
+    private var previousPageUrl: String? = null
+
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
@@ -54,9 +59,23 @@ class PokemonListPresenter : MvpPresenter<PokemonListView>() {
     }
 
     private fun loadData() {
+        repositoryImpl.getList().updateList()
+    }
 
-        repositoryImpl.getList().observeOn(uiScheduler)
+    fun nextPage() {
+        repositoryImpl.nextPage(nextPageUrl).updateList()
+    }
+
+    fun previousPage() {
+        repositoryImpl.previousPage(previousPageUrl).updateList()
+    }
+
+    private fun Single<ListPokemon>.updateList() {
+        observeOn(uiScheduler)
             .subscribe({
+                nextPageUrl = it.next
+                previousPageUrl = it.previous
+                pokemonItemPresenter.pokemons.clear()
                 pokemonItemPresenter.pokemons.addAll(it.results)
                 viewState.updateList()
             }, {

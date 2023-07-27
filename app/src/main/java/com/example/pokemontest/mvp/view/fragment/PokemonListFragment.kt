@@ -39,6 +39,12 @@ class PokemonListFragment : MvpAppCompatFragment(), PokemonListView, BackPressed
         return viewBinding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewBinding.nextBtn.setOnClickListener { presenter.nextPage() }
+        viewBinding.previousBtn.setOnClickListener { presenter.previousPage() }
+    }
+
     override fun init() {
         viewBinding.rvPokemonList.layoutManager = LinearLayoutManager(context)
         adapter = PokemonRVAdapter(presenter.pokemonItemPresenter).apply {
