@@ -49,6 +49,7 @@ class PokemonListPresenter : MvpPresenter<PokemonListView>() {
 
     private var nextPageUrl: String? = null
     private var previousPageUrl: String? = null
+    var limit: String? = null
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -58,16 +59,16 @@ class PokemonListPresenter : MvpPresenter<PokemonListView>() {
         loadData()
     }
 
-    private fun loadData() {
-        repositoryImpl.getList().updateList()
+    fun loadData() {
+        repositoryImpl.getList(limit).updateList()
     }
 
     fun nextPage() {
-        repositoryImpl.nextPage(nextPageUrl).updateList()
+        repositoryImpl.nextPage(nextPageUrl, limit).updateList()
     }
 
     fun previousPage() {
-        repositoryImpl.previousPage(previousPageUrl).updateList()
+        repositoryImpl.previousPage(previousPageUrl, limit).updateList()
     }
 
     private fun Single<ListPokemon>.updateList() {
@@ -75,6 +76,7 @@ class PokemonListPresenter : MvpPresenter<PokemonListView>() {
             .subscribe({
                 nextPageUrl = it.next
                 previousPageUrl = it.previous
+                viewState.showCount(it.count)
                 pokemonItemPresenter.pokemons.clear()
                 pokemonItemPresenter.pokemons.addAll(it.results)
                 viewState.updateList()

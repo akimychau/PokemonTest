@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokemontest.App
+import com.example.pokemontest.R
 import com.example.pokemontest.databinding.FragmentPokemonListBinding
 import com.example.pokemontest.mvp.presenter.PokemonListPresenter
 import com.example.pokemontest.mvp.view.PokemonListView
@@ -41,8 +42,19 @@ class PokemonListFragment : MvpAppCompatFragment(), PokemonListView, BackPressed
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        clickListeners()
+    }
+
+    private fun clickListeners() {
         viewBinding.nextBtn.setOnClickListener { presenter.nextPage() }
+
         viewBinding.previousBtn.setOnClickListener { presenter.previousPage() }
+
+        viewBinding.inputLayout.setEndIconOnClickListener {
+            presenter.limit = viewBinding.inputEditText.text.toString()
+            presenter.loadData()
+        }
     }
 
     override fun init() {
@@ -56,6 +68,10 @@ class PokemonListFragment : MvpAppCompatFragment(), PokemonListView, BackPressed
     @SuppressLint("NotifyDataSetChanged")
     override fun updateList() {
         adapter?.notifyDataSetChanged()
+    }
+
+    override fun showCount(count: Int) {
+        viewBinding.inputLayout.helperText = getString(R.string.max_value_is) + count.toString()
     }
 
     override fun onDestroyView() {
