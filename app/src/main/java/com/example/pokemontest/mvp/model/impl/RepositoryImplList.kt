@@ -2,7 +2,7 @@ package com.example.pokemontest.mvp.model.impl
 
 import com.example.pokemontest.mvp.model.IRepositoryList
 import com.example.pokemontest.mvp.model.api.IDataSource
-import com.example.pokemontest.mvp.model.entity.ListPokemon
+import com.example.pokemontest.mvp.model.entity.list.ListPokemon
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 

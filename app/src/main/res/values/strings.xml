@@ -2,4 +2,6 @@
     <string name="app_name">PokemonTest</string>
     <string name="limit_per_page">Limit per page</string>
     <string name="max_value_is">"Max value is: "</string>
+    <string name="height">"Height: "</string>
+    <string name="weight">"Weight: "</string>
 </resources>

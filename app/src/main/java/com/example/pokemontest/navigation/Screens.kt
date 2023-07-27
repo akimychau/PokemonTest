@@ -1,6 +1,6 @@
 package com.example.pokemontest.navigation
 
-import com.example.pokemontest.mvp.model.entity.Pokemon
+import com.example.pokemontest.mvp.model.entity.list.Pokemon
 import com.example.pokemontest.mvp.view.fragment.PokemonDetailsFragment
 import com.example.pokemontest.mvp.view.fragment.PokemonListFragment
 import com.github.terrakok.cicerone.androidx.FragmentScreen

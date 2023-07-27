@@ -2,8 +2,8 @@ package com.example.pokemontest.mvp.presenter
 
 import com.example.pokemontest.di.list.ListScopeContainer
 import com.example.pokemontest.mvp.model.IRepositoryList
-import com.example.pokemontest.mvp.model.entity.ListPokemon
-import com.example.pokemontest.mvp.model.entity.Pokemon
+import com.example.pokemontest.mvp.model.entity.list.ListPokemon
+import com.example.pokemontest.mvp.model.entity.list.Pokemon
 import com.example.pokemontest.mvp.presenter.itemPresenter.IPokemonItemPresenter
 import com.example.pokemontest.mvp.view.PokemonListView
 import com.example.pokemontest.mvp.view.itemView.IPokemonItemView
