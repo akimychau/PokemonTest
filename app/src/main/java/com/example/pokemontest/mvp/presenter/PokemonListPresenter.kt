@@ -1,12 +1,13 @@
 package com.example.pokemontest.mvp.presenter
 
 import com.example.pokemontest.di.list.ListScopeContainer
-import com.example.pokemontest.mvp.model.IRepository
+import com.example.pokemontest.mvp.model.IRepositoryList
 import com.example.pokemontest.mvp.model.entity.ListPokemon
 import com.example.pokemontest.mvp.model.entity.Pokemon
 import com.example.pokemontest.mvp.presenter.itemPresenter.IPokemonItemPresenter
 import com.example.pokemontest.mvp.view.PokemonListView
 import com.example.pokemontest.mvp.view.itemView.IPokemonItemView
+import com.example.pokemontest.navigation.IScreens
 import com.example.pokemontest.utils.disposeBy
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
@@ -21,13 +22,16 @@ class PokemonListPresenter : MvpPresenter<PokemonListView>() {
     lateinit var router: Router
 
     @Inject
-    lateinit var repositoryImpl: IRepository
+    lateinit var repositoryImpl: IRepositoryList
 
     @Inject
     lateinit var listScopeContainer: ListScopeContainer
 
     @Inject
     lateinit var uiScheduler: Scheduler
+
+    @Inject
+    lateinit var screen: IScreens
 
     private var disposable = CompositeDisposable()
 
@@ -56,6 +60,10 @@ class PokemonListPresenter : MvpPresenter<PokemonListView>() {
         viewState.init()
 
         loadData(null)
+
+        pokemonItemPresenter.itemClickListener = {
+            router.navigateTo(screen.pokemonDetailsScreen(pokemonItemPresenter.pokemons[it.pos]))
+        }
     }
 
     fun loadData(limit: String?) {
