@@ -12,8 +12,8 @@ interface IDataSource {
     fun getAllPokemon(@Query("limit") limit: String?): Single<ListPokemon>
 
     @GET
-    fun previousPage(@Url previous: String?, @Query("limit") limit: String?): Single<ListPokemon>
+    fun previousPage(@Url previous: String?): Single<ListPokemon>
 
     @GET
-    fun nextPage(@Url next: String?, @Query("limit") limit: String?): Single<ListPokemon>
+    fun nextPage(@Url next: String?): Single<ListPokemon>
 }

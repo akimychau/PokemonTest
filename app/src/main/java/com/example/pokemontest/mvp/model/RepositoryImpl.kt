@@ -11,9 +11,9 @@ class RepositoryImpl(private val api: IDataSource) : IRepository {
     override fun getList(limit: String?): Single<ListPokemon> =
         api.getAllPokemon(limit).subscribeOn(Schedulers.io())
 
-    override fun nextPage(next: String?, limit: String?) =
-        api.nextPage(next, limit).subscribeOn(Schedulers.io())
+    override fun nextPage(next: String?) =
+        api.nextPage(next).subscribeOn(Schedulers.io())
 
-    override fun previousPage(previous: String?, limit: String?) =
-        api.previousPage(previous, limit).subscribeOn(Schedulers.io())
+    override fun previousPage(previous: String?) =
+        api.previousPage(previous).subscribeOn(Schedulers.io())
 }

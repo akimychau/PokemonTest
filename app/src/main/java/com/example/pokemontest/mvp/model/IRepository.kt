@@ -7,6 +7,6 @@ interface IRepository {
 
     fun getList(limit: String?): Single<ListPokemon>
 
-    fun nextPage(next: String?, limit: String?): Single<ListPokemon>
-    fun previousPage(previous: String?, limit: String?): Single<ListPokemon>
+    fun nextPage(next: String?): Single<ListPokemon>
+    fun previousPage(previous: String?): Single<ListPokemon>
 }

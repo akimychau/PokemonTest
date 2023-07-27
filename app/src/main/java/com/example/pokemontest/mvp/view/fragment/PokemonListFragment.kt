@@ -52,8 +52,7 @@ class PokemonListFragment : MvpAppCompatFragment(), PokemonListView, BackPressed
         viewBinding.previousBtn.setOnClickListener { presenter.previousPage() }
 
         viewBinding.inputLayout.setEndIconOnClickListener {
-            presenter.limit = viewBinding.inputEditText.text.toString()
-            presenter.loadData()
+            presenter.loadData(viewBinding.inputEditText.text.toString())
         }
     }
 
