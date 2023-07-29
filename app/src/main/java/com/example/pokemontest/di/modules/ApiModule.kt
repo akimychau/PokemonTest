@@ -1,6 +1,9 @@
 package com.example.pokemontest.di.modules
 
+import com.example.pokemontest.App
 import com.example.pokemontest.mvp.model.api.IDataSource
+import com.example.pokemontest.mvp.model.network.INetworkStatus
+import com.example.pokemontest.ui.network.ConnectivityListener
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -35,4 +38,8 @@ class ApiModule {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(IDataSource::class.java)
+
+    @Singleton
+    @Provides
+    fun networkStatus(app: App): INetworkStatus = ConnectivityListener(app)
 }

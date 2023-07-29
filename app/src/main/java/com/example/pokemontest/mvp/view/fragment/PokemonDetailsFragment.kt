@@ -11,7 +11,7 @@ import com.example.pokemontest.mvp.model.entity.details.DetailsPokemon
 import com.example.pokemontest.mvp.model.entity.list.Pokemon
 import com.example.pokemontest.mvp.presenter.PokemonDetailsPresenter
 import com.example.pokemontest.mvp.view.PokemonDetailsView
-import com.example.pokemontest.mvp.view.imageView.IImageLoader
+import com.example.pokemontest.ui.imageLoader.IImageLoader
 import com.example.pokemontest.navigation.BackPressedListener
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter

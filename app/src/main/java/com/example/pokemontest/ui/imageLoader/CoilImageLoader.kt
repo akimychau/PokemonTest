@@ -1,11 +1,10 @@
-package com.example.pokemontest.mvp.view.image
+package com.example.pokemontest.ui.imageLoader
 
 import android.widget.ImageView
 import coil.ImageLoader
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
 import com.example.pokemontest.R
-import com.example.pokemontest.mvp.view.imageView.IImageLoader
 
 class CoilImageLoader : IImageLoader<ImageView> {
 
