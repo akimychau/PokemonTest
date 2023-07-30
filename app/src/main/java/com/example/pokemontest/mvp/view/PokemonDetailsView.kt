@@ -9,4 +9,7 @@ import moxy.viewstate.strategy.StateStrategyType
 interface PokemonDetailsView : MvpView {
 
     fun init(pokemon: DetailsPokemon)
+
+    fun showLoading()
+    fun showError()
 }

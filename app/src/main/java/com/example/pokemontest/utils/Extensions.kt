@@ -22,3 +22,7 @@ fun <T : Any> Single<T>.doCompletable(
         completableCreator(it).andThen(Single.just(it))
     }
 }
+
+fun String.firstCharToUpperCase(): String = replaceFirstChar { firstChar ->
+    firstChar.uppercase()
+}

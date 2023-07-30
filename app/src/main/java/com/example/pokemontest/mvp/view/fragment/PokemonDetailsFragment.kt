@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import com.example.pokemontest.App
 import com.example.pokemontest.databinding.FragmentPokemonDetailsBinding
 import com.example.pokemontest.mvp.model.entity.api.details.DetailsPokemon
@@ -47,8 +48,13 @@ class PokemonDetailsFragment : MvpAppCompatFragment(), PokemonDetailsView, BackP
         return viewBinding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewBinding.btnRefresh.setOnClickListener { presenter.loadData() }
+    }
+
     override fun init(pokemon: DetailsPokemon) {
-        viewBinding.testText.text = pokemon.name
+        viewBinding.name.text = pokemon.name
 
         "Height: ${pokemon.height} cm".also { viewBinding.height.text = it }
         "Weight: ${pokemon.weight} kg".also { viewBinding.weight.text = it }
@@ -57,8 +63,26 @@ class PokemonDetailsFragment : MvpAppCompatFragment(), PokemonDetailsView, BackP
 
         viewBinding.typeOne.text = pokemon.types[FIRST_ELEMENT].type.name
         if (pokemon.types.size > 1) {
+            viewBinding.typeTwo.visibility = View.VISIBLE
             viewBinding.typeTwo.text = pokemon.types[SECOND_ELEMENT].type.name
         }
+        viewBinding.progressBar.visibility = View.GONE
+        viewBinding.btnRefresh.visibility = View.GONE
+    }
+
+    override fun showLoading() {
+        viewBinding.progressBar.visibility = View.VISIBLE
+    }
+
+    override fun showError() {
+        viewBinding.btnRefresh.visibility = View.VISIBLE
+        viewBinding.progressBar.visibility =View.GONE
+        Toast.makeText(
+            requireContext(),
+            "Error...Please try it later",
+            Toast.LENGTH_SHORT
+        )
+            .show()
     }
 
     override fun onDestroyView() {

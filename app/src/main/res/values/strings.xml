@@ -6,4 +6,8 @@
     <string name="weight">"Weight: "</string>
     <string name="cm">" cm"</string>
     <string name="kg">" kg"</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="max_count_is">Max count is:</string>
+    <string name="testText">TESTTESTTEST</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.pokemontest.mvp.presenter
 
+import android.util.Log
 import com.example.pokemontest.di.list.ListScopeContainer
 import com.example.pokemontest.mvp.model.IRepositoryList
 import com.example.pokemontest.mvp.model.entity.api.list.ListPokemon
@@ -9,6 +10,7 @@ import com.example.pokemontest.mvp.view.PokemonListView
 import com.example.pokemontest.mvp.view.itemView.IPokemonItemView
 import com.example.pokemontest.navigation.IScreens
 import com.example.pokemontest.utils.disposeBy
+import com.example.pokemontest.utils.firstCharToUpperCase
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.core.Single
@@ -43,7 +45,7 @@ class PokemonListPresenter : MvpPresenter<PokemonListView>() {
 
         override fun bindView(view: IPokemonItemView) {
             val pokemon = pokemons[view.pos]
-            view.setName(pokemon.name)
+            view.setName(pokemon.name.firstCharToUpperCase())
         }
 
         override fun getCount() = pokemons.size
@@ -71,24 +73,37 @@ class PokemonListPresenter : MvpPresenter<PokemonListView>() {
     }
 
     fun nextPage() {
-        repositoryImpl.nextPage(nextPageUrl).updateList()
+        if (nextPageUrl != null)
+            repositoryImpl.nextPage(nextPageUrl).updateList()
+        else
+            viewState.showEmptyToast()
     }
 
     fun previousPage() {
-        repositoryImpl.previousPage(previousPageUrl).updateList()
+        if (previousPageUrl != null)
+            repositoryImpl.previousPage(previousPageUrl).updateList()
+        else
+            viewState.showEmptyToast()
     }
 
     private fun Single<ListPokemon>.updateList() {
         observeOn(uiScheduler)
+            .doOnSubscribe { viewState.showLoading() }
             .subscribe({
                 nextPageUrl = it.next
                 previousPageUrl = it.previous
                 viewState.showCount(it.count)
                 pokemonItemPresenter.pokemons.clear()
                 pokemonItemPresenter.pokemons.addAll(it.results)
+                if (it.next == null && it.previous == null) {
+                    viewState.showError()
+                } else{
+                    viewState.showSuccess()
+                }
                 viewState.updateList()
-            }, {
-
+            }, { error ->
+                error.message?.let { it1 -> Log.d("@@@", it1) }
+                viewState.showError()
             }).disposeBy(disposable)
     }
 

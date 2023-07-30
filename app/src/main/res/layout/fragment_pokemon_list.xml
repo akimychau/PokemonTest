@@ -1,52 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btnRefresh"
+        android:background="@null"
+        android:src="@drawable/baseline_refresh_big"
+        android:layout_gravity="center"
+        android:layout_marginVertical="@dimen/margin_xx_medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+    
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input_layout"
-        android:layout_width="202dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="@dimen/text_input_width"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:hint="@string/limit_per_page"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="20dp"
+        android:paddingHorizontal="@dimen/margin_medium"
+        android:paddingVertical="@dimen/margin_xx_medium"
         app:endIconDrawable="@drawable/baseline_refresh_24"
         app:endIconMode="custom"
-        app:helperText="Max count is: ">
+        app:helperText="@string/max_count_is">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"/>
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/previousBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/nav_pages_btn_size"
             android:layout_height="wrap_content"
-            android:text="previous" />
+            android:layout_marginHorizontal="@dimen/margin_xx_small"
+            android:text="@string/previous" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/nextBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/nav_pages_btn_size"
             android:layout_height="wrap_content"
-            android:text="next" />
+            android:layout_marginHorizontal="@dimen/margin_xx_small"
+            android:text="@string/next" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hairline"
+        android:layout_marginTop="@dimen/margin_small"
+        android:background="@color/color_gray" />
+
+    <FrameLayout
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPokemonList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp" />
+        android:clipToPadding="false" />
 </androidx.appcompat.widget.LinearLayoutCompat>

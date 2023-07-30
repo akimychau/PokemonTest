@@ -10,4 +10,9 @@ interface PokemonListView : MvpView {
     fun init()
     fun updateList()
     fun showCount(count: Int)
+    fun showEmptyToast()
+
+    fun showLoading()
+    fun showError()
+    fun showSuccess()
 }

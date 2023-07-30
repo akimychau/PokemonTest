@@ -7,9 +7,9 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class DetailsPokemon(
     @Expose val id: Int,
-    @Expose val name: String,
+    @Expose var name: String,
     @Expose val sprites: Sprites,
     @Expose val types: List<Type>,
-    @Expose val height: Int,
-    @Expose val weight: Float
+    @Expose var height: Int,
+    @Expose var weight: Float
 ) : Parcelable

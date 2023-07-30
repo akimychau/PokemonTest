@@ -11,5 +11,5 @@ data class Type(
 
 @Parcelize
 data class TypeX(
-    @Expose val name: String
+    @Expose var name: String
 ) : Parcelable
