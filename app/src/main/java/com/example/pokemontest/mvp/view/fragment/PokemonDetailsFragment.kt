@@ -7,12 +7,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.example.pokemontest.App
 import com.example.pokemontest.databinding.FragmentPokemonDetailsBinding
-import com.example.pokemontest.mvp.model.entity.details.DetailsPokemon
-import com.example.pokemontest.mvp.model.entity.list.Pokemon
+import com.example.pokemontest.mvp.model.entity.api.details.DetailsPokemon
+import com.example.pokemontest.mvp.model.entity.api.list.Pokemon
 import com.example.pokemontest.mvp.presenter.PokemonDetailsPresenter
 import com.example.pokemontest.mvp.view.PokemonDetailsView
-import com.example.pokemontest.ui.imageLoader.IImageLoader
 import com.example.pokemontest.navigation.BackPressedListener
+import com.example.pokemontest.ui.imageLoader.IImageLoader
+import com.example.pokemontest.utils.FIRST_ELEMENT
+import com.example.pokemontest.utils.SECOND_ELEMENT
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
@@ -47,9 +49,16 @@ class PokemonDetailsFragment : MvpAppCompatFragment(), PokemonDetailsView, BackP
 
     override fun init(pokemon: DetailsPokemon) {
         viewBinding.testText.text = pokemon.name
-        viewBinding.height.text = pokemon.height.toString()
-        viewBinding.weight.text = pokemon.weight.toString()
+
+        "Height: ${pokemon.height} cm".also { viewBinding.height.text = it }
+        "Weight: ${pokemon.weight} kg".also { viewBinding.weight.text = it }
+
         imageLoader.loadInto(pokemon.sprites.other.dream_world.front_default, viewBinding.image)
+
+        viewBinding.typeOne.text = pokemon.types[FIRST_ELEMENT].type.name
+        if (pokemon.types.size > 1) {
+            viewBinding.typeTwo.text = pokemon.types[SECOND_ELEMENT].type.name
+        }
     }
 
     override fun onDestroyView() {

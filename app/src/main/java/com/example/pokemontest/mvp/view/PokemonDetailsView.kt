@@ -1,6 +1,6 @@
 package com.example.pokemontest.mvp.view
 
-import com.example.pokemontest.mvp.model.entity.details.DetailsPokemon
+import com.example.pokemontest.mvp.model.entity.api.details.DetailsPokemon
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType

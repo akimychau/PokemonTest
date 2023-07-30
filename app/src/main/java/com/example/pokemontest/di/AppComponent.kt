@@ -4,6 +4,7 @@ import com.example.pokemontest.di.list.ListSubComponent
 import com.example.pokemontest.di.modules.ApiModule
 import com.example.pokemontest.di.modules.AppModule
 import com.example.pokemontest.di.modules.CiceroneModule
+import com.example.pokemontest.di.modules.DatabaseModule
 import com.example.pokemontest.di.modules.ImageLoaderModule
 import com.example.pokemontest.mvp.presenter.MainPresenter
 import com.example.pokemontest.mvp.view.activity.MainActivity
@@ -16,7 +17,8 @@ import javax.inject.Singleton
         ApiModule::class,
         AppModule::class,
         CiceroneModule::class,
-        ImageLoaderModule::class
+        ImageLoaderModule::class,
+        DatabaseModule::class
     ]
 )
 interface AppComponent {

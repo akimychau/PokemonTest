@@ -1,4 +1,4 @@
-package com.example.pokemontest.mvp.model.entity.list
+package com.example.pokemontest.mvp.model.entity.api.list
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose

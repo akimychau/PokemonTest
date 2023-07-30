@@ -1,4 +1,4 @@
-package com.example.pokemontest.mvp.model.entity.details
+package com.example.pokemontest.mvp.model.entity.api.details
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
@@ -6,7 +6,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Sprites(
-    @Expose val front_default: String,
     @Expose val other: DreamWorld
 ) : Parcelable
 

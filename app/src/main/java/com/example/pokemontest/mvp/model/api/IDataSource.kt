@@ -1,7 +1,7 @@
 package com.example.pokemontest.mvp.model.api
 
-import com.example.pokemontest.mvp.model.entity.details.DetailsPokemon
-import com.example.pokemontest.mvp.model.entity.list.ListPokemon
+import com.example.pokemontest.mvp.model.entity.api.details.DetailsPokemon
+import com.example.pokemontest.mvp.model.entity.api.list.ListPokemon
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

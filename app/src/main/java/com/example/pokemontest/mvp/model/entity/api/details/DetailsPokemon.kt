@@ -1,4 +1,4 @@
-package com.example.pokemontest.mvp.model.entity.details
+package com.example.pokemontest.mvp.model.entity.api.details
 
 import android.os.Parcelable
 import com.google.gson.annotations.Expose
@@ -11,5 +11,5 @@ data class DetailsPokemon(
     @Expose val sprites: Sprites,
     @Expose val types: List<Type>,
     @Expose val height: Int,
-    @Expose val weight: Int
+    @Expose val weight: Float
 ) : Parcelable

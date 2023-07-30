@@ -4,4 +4,6 @@
     <string name="max_value_is">"Max value is: "</string>
     <string name="height">"Height: "</string>
     <string name="weight">"Weight: "</string>
+    <string name="cm">" cm"</string>
+    <string name="kg">" kg"</string>
 </resources>
