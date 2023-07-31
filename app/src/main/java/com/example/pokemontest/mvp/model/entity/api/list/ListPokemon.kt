@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ListPokemon(
-    @Expose val count: Int,
+    @Expose val count: Int?,
     @Expose val next: String?,
     @Expose val previous: String?,
     @Expose val results: List<Pokemon>

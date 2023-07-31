@@ -16,5 +16,5 @@ data class DreamWorld(
 
 @Parcelize
 data class Front(
-    @Expose val front_default: String
+    @Expose val front_default: String?
 ) : Parcelable

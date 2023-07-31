@@ -92,12 +92,12 @@ class PokemonListPresenter : MvpPresenter<PokemonListView>() {
             .subscribe({
                 nextPageUrl = it.next
                 previousPageUrl = it.previous
-                viewState.showCount(it.count)
+                it.count?.let { it1 -> viewState.showCount(it1) }
                 pokemonItemPresenter.pokemons.clear()
                 pokemonItemPresenter.pokemons.addAll(it.results)
-                if (it.next == null && it.previous == null) {
+                if (it.next == null && it.previous == null && it.count == null) {
                     viewState.showError()
-                } else{
+                } else {
                     viewState.showSuccess()
                 }
                 viewState.updateList()

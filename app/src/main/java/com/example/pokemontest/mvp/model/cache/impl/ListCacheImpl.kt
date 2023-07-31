@@ -25,7 +25,7 @@ class ListCacheImpl(private val db: AppDatabase) : IListCache {
                 )
             }
             ListPokemon(
-                list.size,
+                null,
                 null,
                 null,
                 list

@@ -18,7 +18,7 @@ data class RoomDetailsPokemon(
     @PrimaryKey
     val id: Int,
     val name: String,
-    val image: String,
+    val image: String?,
     val types: List<Type>,
     val height: Int,
     val weight: Float,
