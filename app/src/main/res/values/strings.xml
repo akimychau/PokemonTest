@@ -10,4 +10,6 @@
     <string name="previous">Previous</string>
     <string name="max_count_is">Max count is:</string>
     <string name="testText">TESTTESTTEST</string>
+    <string name="loading_error">Loading error... Try again later</string>
+    <string name="back">back</string>
 </resources>

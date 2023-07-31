@@ -29,4 +29,7 @@
 
     //Corner radius
     <dimen name="button_corner_radius">12dp</dimen>
+
+    <dimen name="nav_pages_btn_size">97dp</dimen>
+    <dimen name="image_height">500dp</dimen>
 </resources>

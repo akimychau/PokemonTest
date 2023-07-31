@@ -16,7 +16,7 @@ class CoilImageLoader : IImageLoader<ImageView> {
         val request = ImageRequest.Builder(container.context)
             .crossfade(true)
             .crossfade(500)
-            .placeholder(R.drawable.baseline_person_24)
+            .placeholder(R.drawable.pokeball)
             .error(R.drawable.baseline_report_gmailerrorred_24)
             .data(url)
             .target(container)

@@ -56,7 +56,14 @@ class PokemonListFragment : MvpAppCompatFragment(), PokemonListView, BackPressed
             presenter.loadData(viewBinding.inputEditText.text.toString())
         }
 
-        viewBinding.btnRefresh.setOnClickListener { presenter.loadData(null) }
+        viewBinding.btnRefresh.setOnClickListener {
+            presenter.loadData(null)
+            Toast.makeText(
+                requireContext(),
+                "Trying to download data",
+                Toast.LENGTH_SHORT
+            )
+                .show()}
     }
 
     override fun init() {
@@ -90,21 +97,17 @@ class PokemonListFragment : MvpAppCompatFragment(), PokemonListView, BackPressed
     }
 
     override fun showError() {
+        viewBinding.textError.visibility = View.VISIBLE
         viewBinding.inputLayout.visibility = View.GONE
         viewBinding.nextBtn.visibility = View.GONE
         viewBinding.previousBtn.visibility = View.GONE
         viewBinding.rvPokemonList.visibility = View.VISIBLE
         viewBinding.btnRefresh.visibility = View.VISIBLE
-        viewBinding.progressBar.visibility =View.GONE
-        Toast.makeText(
-            requireContext(),
-            "Error...Please try it later",
-            Toast.LENGTH_SHORT
-        )
-            .show()
+        viewBinding.progressBar.visibility = View.GONE
     }
 
     override fun showSuccess() {
+        viewBinding.textError.visibility = View.GONE
         viewBinding.progressBar.visibility = View.GONE
         viewBinding.rvPokemonList.visibility = View.VISIBLE
         viewBinding.inputLayout.visibility = View.VISIBLE
